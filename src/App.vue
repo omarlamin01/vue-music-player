@@ -10,7 +10,7 @@ export default {
   methods: {
     //calculate sum of two int
     sum(a, b) {
-      
+
     }
   }
 }
