@@ -5,7 +5,7 @@
 		</header>
 		<main>
 			<div class="player">
-				<h2 class="song-title">Test</h2>
+				<h2 class="song-title">{{ current.title }}</h2>
 			</div>
 		</main>
 	</div>
@@ -14,6 +14,18 @@
 <script>
 export default {
 	name: "App",
+	data() {
+		return {
+			current: {
+				title: "song title",
+				artist: "Test",
+				album: "Test",
+				cover: "https://picsum.photos/200/200",
+				file: "https://picsum.photos/200/200",
+				duration: "00:00"
+			}
+		};
+	},
 	methods: {},
 };
 </script>
@@ -25,11 +37,16 @@ export default {
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	color: #2c3e50;
-	margin-top: 60px;
+	padding: 0;
+	margin: 0;
 }
 
 header {
 	display: flex;
 	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	background-color: #212121;
+	color: #fff;
 }
 </style>
