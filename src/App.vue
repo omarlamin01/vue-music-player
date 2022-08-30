@@ -110,7 +110,6 @@ export default {
 	created() {
 		this.current = this.songs[this.index];
 		this.player.src = this.songs[this.index].url;
-		this.player.play();
 	},
 };
 </script>
