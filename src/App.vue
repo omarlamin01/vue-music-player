@@ -19,7 +19,7 @@ export default {
 	data() {
 		return {
 			current: {},
-			index: 0,
+			index: 1,
 			songs: [
 				{
 				name: "Mekanın Sahibi",
@@ -109,7 +109,8 @@ export default {
 	methods: {},
 	created() {
 		this.current = this.songs[this.index];
-		this.player.src = this.current.url;
+		this.player.src = this.songs[this.index].url;
+		this.player.play();
 	},
 };
 </script>
