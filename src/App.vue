@@ -5,11 +5,28 @@
     </header>
     <main>
 		<div class="player">
+			<div class="track">
+				<h2>{{ current.name }} - <span>{{ current.artist }}</span></h2>
+				<img :src="current.cover" alt="cover">
+				<!-- progress bar -->
+				<div class="progress">
+					<progress class="progress-bar" :max="player.duration" :value="player.currentTime" />
+				</div>
+			</div>
+			
 			<div class="player-controls">
-				<button class="player-controls-button" @click="togglePlay()">
+				<button
+					v-if="!isPlaying"
+					class="player-controls-button"
+					@click="togglePlay"
+				>
 					<i class="fas fa-play"></i>
 				</button>
-				<button class="player-controls-button" @click="togglePlay()">
+				<button
+					v-else-if="isPlaying"
+					class="player-controls-button" 
+					@click="togglePlay()"
+				>
 					<i class="fas fa-pause"></i>
 				</button>
 				<button class="player-controls-button" @click="togglePlay()">
@@ -48,105 +65,114 @@ export default {
   name: "App",
   data() {
     return {
-      current: {},
-      index: 1,
-      songs: [
-        {
-          name: "Mekanın Sahibi",
-          artist: "Norm Ender",
-          cover: "https://picsum.photos/200/200",
-          source:
-            "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/1.mp3",
-          url: require("@/assets/Tracks/1.mp3"),
-          favorited: false,
-        },
-        {
-          name: "Everybody Knows",
-          artist: "Leonard Cohen",
-          cover: "https://picsum.photos/200/200",
-          source:
-            "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/2.mp3",
-          url: require("@/assets/Tracks/2.mp3"),
-          favorited: true,
-        },
-        {
-          name: "Extreme Ways",
-          artist: "Moby",
-          cover: "https://picsum.photos/200/200",
-          source:
-            "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/3.mp3",
-          url: require("@/assets/Tracks/3.mp3"),
-          favorited: false,
-        },
-        {
-          name: "Butterflies",
-          artist: "Sia",
-          cover: "https://picsum.photos/200/200",
-          source:
-            "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/4.mp3",
-          url: require("@/assets/Tracks/4.mp3"),
-          favorited: false,
-        },
-        {
-          name: "The Final Victory",
-          artist: "Haggard",
-          cover: "https://picsum.photos/200/200",
-          source:
-            "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/5.mp3",
-          url: require("@/assets/Tracks/5.mp3"),
-          favorited: true,
-        },
-        {
-          name: "Genius ft. Sia, Diplo, Labrinth",
-          artist: "LSD",
-          cover: "https://picsum.photos/200/200",
-          source:
-            "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/6.mp3",
-          url: require("@/assets/Tracks/6.mp3"),
-          favorited: false,
-        },
-        {
-          name: "The Comeback Kid",
-          artist: "Lindi Ortega",
-          cover: "https://picsum.photos/200/200",
-          source:
-            "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/7.mp3",
-          url: require("@/assets/Tracks/7.mp3"),
-          favorited: true,
-        },
-        {
-          name: "Overdose",
-          artist: "Grandson",
-          cover: "https://picsum.photos/200/200",
-          source:
-            "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/8.mp3",
-          url: require("@/assets/Tracks/8.mp3"),
-          favorited: false,
-        },
-        {
-          name: "Rag'n'Bone Man",
-          artist: "Human",
-          cover: "https://picsum.photos/200/200",
-          source:
-            "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/9.mp3",
-          url: require("@/assets/Tracks/9.mp3"),
-          favorited: false,
-        },
-      ],
-      player: new Audio(),
+		current: {},
+		index: 1,
+		songs: [
+			{
+			name: "Mekanın Sahibi",
+			artist: "Norm Ender",
+			cover: "https://picsum.photos/200/200",
+			source:
+				"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/1.mp3",
+			url: require("@/assets/Tracks/1.mp3"),
+			favorited: false,
+			},
+			{
+			name: "Everybody Knows",
+			artist: "Leonard Cohen",
+			cover: "https://picsum.photos/200/200",
+			source:
+				"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/2.mp3",
+			url: require("@/assets/Tracks/2.mp3"),
+			favorited: true,
+			},
+			{
+			name: "Extreme Ways",
+			artist: "Moby",
+			cover: "https://picsum.photos/200/200",
+			source:
+				"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/3.mp3",
+			url: require("@/assets/Tracks/3.mp3"),
+			favorited: false,
+			},
+			{
+			name: "Butterflies",
+			artist: "Sia",
+			cover: "https://picsum.photos/200/200",
+			source:
+				"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/4.mp3",
+			url: require("@/assets/Tracks/4.mp3"),
+			favorited: false,
+			},
+			{
+			name: "The Final Victory",
+			artist: "Haggard",
+			cover: "https://picsum.photos/200/200",
+			source:
+				"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/5.mp3",
+			url: require("@/assets/Tracks/5.mp3"),
+			favorited: true,
+			},
+			{
+			name: "Genius ft. Sia, Diplo, Labrinth",
+			artist: "LSD",
+			cover: "https://picsum.photos/200/200",
+			source:
+				"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/6.mp3",
+			url: require("@/assets/Tracks/6.mp3"),
+			favorited: false,
+			},
+			{
+			name: "The Comeback Kid",
+			artist: "Lindi Ortega",
+			cover: "https://picsum.photos/200/200",
+			source:
+				"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/7.mp3",
+			url: require("@/assets/Tracks/7.mp3"),
+			favorited: true,
+			},
+			{
+			name: "Overdose",
+			artist: "Grandson",
+			cover: "https://picsum.photos/200/200",
+			source:
+				"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/8.mp3",
+			url: require("@/assets/Tracks/8.mp3"),
+			favorited: false,
+			},
+			{
+			name: "Rag'n'Bone Man",
+			artist: "Human",
+			cover: "https://picsum.photos/200/200",
+			source:
+				"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/9.mp3",
+			url: require("@/assets/Tracks/9.mp3"),
+			favorited: false,
+			},
+		],
+		player: new Audio(),
+		isPlaying: false,
     };
   },
-  methods: {},
+  methods: {
+	togglePlay() {
+		if (this.isPlaying) {
+			this.player.pause();
+		} else {
+			this.player.play();
+		}
+		this.isPlaying = !this.isPlaying;
+	},
+  },
   created() {
     this.current = this.songs[4];
     this.player.src = this.current.url;
-	this.player.play();
   },
   };
 </script>
 
 <style>
-/*#app {
+#app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -154,7 +180,7 @@ export default {
   color: #2c3e50;
   padding: 0;
   margin: 0;
-}*/
+}
 header {
   display: flex;
   justify-content: center;
