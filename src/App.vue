@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-
+	<header>
+		<h1>Music player</h1>
+	</header>
+	<main>
+		<div class="player">
+			<h2 class="song-title"></h2>
+		</div>
+	</main>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App',
-  methods: {
-    //calculate sum of two int
-    sum(a, b) {
-
-    }
-  }
-}
+  name: "App",
+  methods: {},
+};
 </script>
 
 <style>
