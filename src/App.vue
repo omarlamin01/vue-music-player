@@ -6,8 +6,15 @@
     <main>
 		<div class="player">
 			<div class="track">
-				<h2>{{ current.name }} - <span>{{ current.artist }}</span></h2>
-				<img :src="current.cover" alt="cover">
+				<h2 class="title">
+					{{ current.name }} - 
+					<span>{{ current.artist }}</span>
+				</h2>
+				<img 
+					class="cover"
+					:src="current.cover" 
+					alt="cover"
+				>
 				<!-- progress bar -->
 				<div class="progress">
 					<progress class="progress-bar" :max="player.duration" :value="player.currentTime" />
@@ -147,12 +154,20 @@ export default {
 			player: new Audio(),
 			isPlaying: false,
 			random: false,
+			repeat: true,
 		};
 	},
 	methods: {
 		playTrack() {
 			this.player.play();
+			this.player.autoplay = this.repeat;
 			this.isPlaying = true;
+			this.player.addEventListener('ended', function() {
+				this.current = this.songs[this.index];
+				this.player.src = this.current.url;
+				console.log('>>> ended')
+				console.log('>>> ' + this.current)
+			});
 		},
 		pauseTrack() {
 			this.player.pause();
@@ -202,6 +217,7 @@ export default {
 			}
 		},
 		fastForward() {
+			/*
 			this.current = this.songs[this.songs.length - 1];
 			this.player.src = this.current.url;
 			if (this.isPlaying) {
@@ -209,8 +225,11 @@ export default {
 			} else {
 				this.pauseTrack();
 			}
+			*/
+			this.player.currentTime += 15;
 		},
 		fastBackward() {
+			/*
 			this.current = this.songs[0];
 			this.player.src = this.current.url;
 			if (this.isPlaying) {
@@ -218,6 +237,8 @@ export default {
 			} else {
 				this.pauseTrack();
 			}
+			*/
+			this.player.currentTime -= 15;
 		},
 	},
 	created() {
@@ -245,5 +266,21 @@ header {
 	padding: 20px;
 	background-color: #212121;
 	color: #fff;
+}
+.title {
+	font-size: 32px;
+	font-weight: 700;
+	text-transform: uppercase;
+	text-align: center;
+}
+.cover {
+	width: 200px;
+	height: 200px;
+}
+.progress progress {
+	width: 200px;
+	height: 5px;
+	border-radius: 99999999999999px;
+	margin: 16px;
 }
 </style>
