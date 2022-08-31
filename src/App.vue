@@ -81,8 +81,7 @@ export default {
 				name: "Everybody Knows",
 				artist: "Leonard Cohen",
 				cover: require("@/assets/Covers/2.jpg"),
-				source:
-					"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/2.mp3",
+				source: require("@/assets/Tracks/2.mp3"),
 				url: require("@/assets/Tracks/2.mp3"),
 				favorited: true,
 				},
@@ -90,8 +89,7 @@ export default {
 				name: "Extreme Ways",
 				artist: "Moby",
 				cover: require("@/assets/Covers/3.jpg"),
-				source:
-					"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/3.mp3",
+				source: require("@/assets/Tracks/3.mp3"),
 				url: require("@/assets/Tracks/3.mp3"),
 				favorited: false,
 				},
@@ -99,8 +97,7 @@ export default {
 				name: "Butterflies",
 				artist: "Sia",
 				cover: require("@/assets/Covers/4.jpg"),
-				source:
-					"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/4.mp3",
+				source: require("@/assets/Tracks/4.mp3"),
 				url: require("@/assets/Tracks/4.mp3"),
 				favorited: false,
 				},
@@ -108,8 +105,7 @@ export default {
 				name: "The Final Victory",
 				artist: "Haggard",
 				cover: require("@/assets/Covers/5.jpg"),
-				source:
-					"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/5.mp3",
+				source: require("@/assets/Tracks/5.mp3"),
 				url: require("@/assets/Tracks/5.mp3"),
 				favorited: true,
 				},
@@ -117,8 +113,7 @@ export default {
 				name: "Genius ft. Sia, Diplo, Labrinth",
 				artist: "LSD",
 				cover: require("@/assets/Covers/6.jpg"),
-				source:
-					"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/6.mp3",
+				source: require("@/assets/Tracks/6.mp3"),
 				url: require("@/assets/Tracks/6.mp3"),
 				favorited: false,
 				},
@@ -126,8 +121,7 @@ export default {
 				name: "The Comeback Kid",
 				artist: "Lindi Ortega",
 				cover: require("@/assets/Covers/7.jpg"),
-				source:
-					"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/7.mp3",
+				source: require("@/assets/Tracks/7.mp3"),
 				url: require("@/assets/Tracks/7.mp3"),
 				favorited: true,
 				},
@@ -135,8 +129,7 @@ export default {
 				name: "Overdose",
 				artist: "Grandson",
 				cover: require("@/assets/Covers/8.jpg"),
-				source:
-					"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/8.mp3",
+				source: require("@/assets/Tracks/8.mp3"),
 				url: require("@/assets/Tracks/8.mp3"),
 				favorited: false,
 				},
@@ -144,8 +137,7 @@ export default {
 				name: "Rag'n'Bone Man",
 				artist: "Human",
 				cover: require("@/assets/Covers/9.jpg"),
-				source:
-					"https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/9.mp3",
+				source: require("@/assets/Tracks/9.mp3"),
 				url: require("@/assets/Tracks/9.mp3"),
 				favorited: false,
 				},
@@ -161,12 +153,15 @@ export default {
 			this.player.play();
 			this.player.autoplay = this.repeat;
 			this.isPlaying = true;
-			this.player.addEventListener('ended', function() {
+			this.player.addEventListener('ended', this.replay());
+		},
+		replay() {
+			if (this.player.currentTime >= this.player.duration) {
 				this.current = this.songs[this.index];
-				this.player.src = this.current.url;
+				this.player.src = this.current.source;
 				console.log('>>> ended')
 				console.log('>>> ' + this.current)
-			});
+			}
 		},
 		pauseTrack() {
 			this.player.pause();
@@ -187,7 +182,7 @@ export default {
 				this.index = 0;
 			}
 			this.current = this.songs[this.index];
-			this.player.src = this.current.url;
+			this.player.src = this.current.source;
 			if (this.isPlaying) {
 				this.playTrack();
 			} else {
@@ -208,7 +203,7 @@ export default {
 				this.index = this.songs.length - 1;
 			}
 			this.current = this.songs[this.index];
-			this.player.src = this.current.url;
+			this.player.src = this.current.source;
 			if (this.isPlaying) {
 				this.playTrack();
 			} else {
@@ -243,7 +238,7 @@ export default {
 	created() {
 		this.player.pause();
 		this.current = this.songs[this.index];
-		this.player.src = this.current.url;
+		this.player.src = this.current.source;
 	},
 	};
 </script>
