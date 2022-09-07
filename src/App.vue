@@ -46,7 +46,7 @@
 					<i class="fas fa-random"></i>
 				</button>
 				<button class="player-controls-button" @click="songs[index].favorited = !songs[index].favorited">
-					<i class="fas fa-random"></i>
+          <i class="fas fa-heart" :class="{ 'favorited': songs[index].favorited }"></i>
 				</button>
 				<button class="player-controls-button" @click="fastForward()">
 					<i class="fas fa-fast-forward"></i>
