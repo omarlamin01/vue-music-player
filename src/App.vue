@@ -223,15 +223,6 @@ export default {
 			this.player.currentTime += 15;
 		},
 		fastBackward() {
-			/*
-			this.current = this.songs[0];
-			this.player.src = this.current.url;
-			if (this.isPlaying) {
-				this.playTrack();
-			} else {
-				this.pauseTrack();
-			}
-			*/
 			this.player.currentTime -= 15;
 		},
 	},
