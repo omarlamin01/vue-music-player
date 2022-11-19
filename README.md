@@ -1,9 +1,7 @@
 # vue-music-player
 
 ## See deployment
-```
-[![vue-music-player](vue-music-player)](https://omarlamin01-github-io-zsa2.vercel.app/)
-```
+[![vue-music-player](public/favicon.png)](https://omarlamin01-github-io-zsa2.vercel.app/)
 
 ## Project setup
 ```
