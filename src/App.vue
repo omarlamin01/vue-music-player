@@ -1,7 +1,7 @@
 <template>
-    <div id="app">
-        <header>
-            <h1>Music player</h1>
+    <div id="app" data-theme="dracula">
+        <header class="bg-base-300">
+            <span class="btn btn-primary p-5 text-4xl">Music player</span>
         </header>
         <main>
             <div class="player">
@@ -235,41 +235,41 @@ export default {
 </script>
 
 <style scoped>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    padding: 0;
-    margin: 0;
-}
+/*#app {*/
+/*    font-family: Avenir, Helvetica, Arial, sans-serif;*/
+/*    -webkit-font-smoothing: antialiased;*/
+/*    -moz-osx-font-smoothing: grayscale;*/
+/*    text-align: center;*/
+/*    color: #2c3e50;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*}*/
 
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background-color: #212121;
-    color: #fff;
-}
+/*header {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    padding: 20px;*/
+/*    background-color: #212121;*/
+/*    color: #fff;*/
+/*}*/
 
-.title {
-    font-size: 32px;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-align: center;
-}
+/*.title {*/
+/*    font-size: 32px;*/
+/*    font-weight: 700;*/
+/*    text-transform: uppercase;*/
+/*    text-align: center;*/
+/*}*/
 
-.cover {
-    width: 200px;
-    height: 200px;
-}
+/*.cover {*/
+/*    width: 200px;*/
+/*    height: 200px;*/
+/*}*/
 
-.progress progress {
-    width: 200px;
-    height: 5px;
-    border-radius: 99999999999999px;
-    margin: 16px;
-}
+/*.progress progress {*/
+/*    width: 200px;*/
+/*    height: 5px;*/
+/*    border-radius: 99999999999999px;*/
+/*    margin: 16px;*/
+/*}*/
 </style>
